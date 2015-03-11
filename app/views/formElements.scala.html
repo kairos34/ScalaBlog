@@ -1,0 +1,10 @@
+@(messageForm: Form[MessageForm])
+
+@import helper._
+
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+@inputText(messageForm("Name"), '_label -> "İsim", 'class -> "form-control")
+@inputText(messageForm("Email"), '_label -> "Email", 'class -> "form-control")
+@inputText(messageForm("Phone"), '_label -> "Telefon", 'class -> "form-control")
+@textarea(messageForm("Message"), '_label -> "Mesaj", 'class -> "form-control", 'rows -> 5, 'cols -> 60, 'style -> "resize:none")
