@@ -1,4 +1,4 @@
-@(message: String)
+@import models.Role.Administrator
 
 @main("Ana Sayfa") {
 
@@ -6,7 +6,14 @@
 
     <div class="container">
         <div class="row">
-           <div class="col-md-8">Postlar buraya gelecekk...</div>
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                @postPreview(new Post(1,new User(1,"alper.ytu7@gmail.com","","Alper","Özaslan",Administrator),123123123,"İlk Post Preview Şablonu","Açılış konuşmasını ben yapacağım",""))
+                @postPreview(new Post(1,new User(1,"alper.ytu7@gmail.com","","Alper","Özaslan",Administrator),123123123,"İlk Post Preview Şablonu","Açılış konuşmasını ben yapacağım",""))
+                @postPreview(new Post(1,new User(1,"alper.ytu7@gmail.com","","Alper","Özaslan",Administrator),123123123,"İlk Post Preview Şablonu","Açılış konuşmasını ben yapacağım",""))
+                @postPreview(new Post(1,new User(1,"alper.ytu7@gmail.com","","Alper","Özaslan",Administrator),123123123,"İlk Post Preview Şablonu","Açılış konuşmasını ben yapacağım",""))
+                @postPreview(new Post(1,new User(1,"alper.ytu7@gmail.com","","Alper","Özaslan",Administrator),123123123,"İlk Post Preview Şablonu","Açılış konuşmasını ben yapacağım",""))
+                @postPreview(new Post(1,new User(1,"alper.ytu7@gmail.com","","Alper","Özaslan",Administrator),123123123,"İlk Post Preview Şablonu","Açılış konuşmasını ben yapacağım",""))
+            </div>
     </div>
     </div>
 }

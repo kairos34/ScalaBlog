@@ -10,5 +10,7 @@ libraryDependencies ++= Seq(
   jdbc,
   anorm,
   cache,
-  ws
+  ws,
+  "jp.t2v" %% "play2-auth"      % "0.13.1",
+  "jp.t2v" %% "play2-auth-test" % "0.13.1" % "test"
 )

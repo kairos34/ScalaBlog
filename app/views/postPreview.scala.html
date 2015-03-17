@@ -1,0 +1,19 @@
+@(post:Post)
+
+@**************************************************
+* Generate post preview from post *
+**************************************************@
+<div class="post-preview">
+    <a href="@routes.Application.blog(post.id)">
+        <h2 class="post-title">
+        @post.title
+        </h2>
+
+        <h3 class="post-subtitle">
+            @post.subTitle
+        </h3>
+
+    </a>
+    <p class="post-meta">Posted by @post.user.firstname on @post.date</p>
+</div>
+<hr>
