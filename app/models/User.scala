@@ -1,53 +1,41 @@
 package models
 
-import anorm.SqlParser._
-import anorm._
-import play.api.Play.current
-import play.api.db._
-
 import scala.language.postfixOps
+import play.api.db.slick.Config.driver.simple._
+import scala.slick.lifted.Tag
+import play.api.db.slick.DB
+import play.api.Play.current
 
 /**
  * Created by Alper on 17.03.2015.
  */
 
-case class User(id:Long,email:String,password:String,firstname:String,surname:String,role:Role)
+case class User(id:Long,email:String,password:String,fullname:String,role:Role)
 
-object User {
+class Users(tag: Tag) extends Table[User](tag,"user"){
+  def id = column[Long]("id", O.PrimaryKey,O.AutoInc)
+  def email = column[String]("email")
+  def password = column[String]("password")
+  def fullname = column[String]("full_name")
+  def role = column[String]("role")
 
-  /**
-   * Parse a User from a ResultSet
-   */
-  val simpleParser = {
-      get[Long]("user.id") ~
-      get[String]("user.email") ~
-      get[String]("user.password") ~
-      get[String]("user.firstname") ~
-      get[String]("user.lastname") ~
-      get[String]("user.role")   map {
-      case id~email~password~firstname~lastname~role => User( id, email ,password ,firstname ,lastname, Role.valueOf(role))
+  def * = (id, email, password, fullname ,role) <>
+    ((t : (Long,
+      String, String, String, String)) => User(t._1, t._2, t._3, t._4, Role.valueOf(t._5)),
+      (u: User) => Some((u.id,u.email,u.password,u.fullname,u.role.toString)))
+}
+object Users extends DAO{
+
+  def findById(id: Long): Option[User] = {
+    DB.withTransaction { implicit session =>
+      users.filter(u => u.id === id).firstOption
     }
   }
 
-  def findById(_id: Long): Option[User] = {
-    DB.withConnection { implicit connection =>
-      SQL("select * from configuration.user where _id = {_id}").on(
-        '_id -> _id
-      ).as(User.simpleParser.singleOpt)
+  def authenticate(email:String,password:String):Option[User] = {
+    DB.withTransaction{ implicit session =>
+      users.filter(u => u.email === email && u.password === password).firstOption
     }
   }
 
-  def authenticate(email: String, password: String): Option[User] = {
-    DB.withConnection { implicit connection =>
-      SQL(
-        """
-         select * from configuration.user where
-         email = {email} and password = {password}
-        """
-      ).on(
-          'email -> email,
-          'password -> password
-        ).as(User.simpleParser.singleOpt)
-    }
-  }
 }

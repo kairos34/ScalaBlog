@@ -1,10 +1,9 @@
 package controllers
 
 import jp.t2v.lab.play2.auth.LoginLogout
-import models.Message
+import models._
 import play.api.data.Form
 import play.api.mvc._
-import models.User
 import play.api.data.Forms._
 
 import scala.concurrent.Future
@@ -12,8 +11,11 @@ import scala.concurrent.ExecutionContext.Implicits.global
 
 object Application extends Controller with LoginLogout with AuthConfigImpl {
 
-  def index = Action {
-    Ok(views.html.index())
+  def index(page: Int, orderBy: Int) = Action { implicit rs =>
+      Ok(views.html.index(
+        Posts.list(page = page, orderBy = orderBy),
+        orderBy
+      ))
   }
 
   def about = Action {
@@ -42,7 +44,7 @@ object Application extends Controller with LoginLogout with AuthConfigImpl {
 
   /** Your application's login form.  Alter it to fit your application */
   val loginForm = Form {
-    mapping("email" -> email, "password" -> nonEmptyText)(User.authenticate)(_.map(u => (u.email, "")))
+    mapping("email" -> email, "password" -> nonEmptyText)(Users.authenticate)(_.map(u => (u.email, "")))
       .verifying("Invalid email or password", result => result.isDefined)
   }
 
