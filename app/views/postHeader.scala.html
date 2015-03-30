@@ -1,0 +1,18 @@
+@(path: String,post: Post)
+
+<!-- Post Header -->
+<header class="intro-header" style="background-image: url('@routes.Assets.at(path)')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>@post.title</h1>
+
+                    <h2 class="subheading">@post.subTitle</h2>
+
+                    <span class="meta">@Users.findById(post.userId).get.fullname tarafından @Posts.convertDate(post.date) tarihinde yazıldı</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>

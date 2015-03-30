@@ -1,14 +1,9 @@
-@(currentPage: Page[Post], currentOrderBy: Int)(implicit flash: play.api.mvc.Flash)
+@(currentPage: Page[Post])(implicit flash: play.api.mvc.Flash)
 
 @****************************************
 * Helper generating navigation links    *
 ****************************************@
-@link(newPage: Int, newOrderBy: Option[Int] = None) = @{
-    routes.Application.index(newPage, newOrderBy.map { orderBy =>
-        if(orderBy == scala.math.abs(currentOrderBy)) -currentOrderBy else orderBy
-    }.getOrElse(currentOrderBy))
-
-}
+@link(newPage: Int) = @{routes.Application.index(newPage)}
 
 @main("Ana Sayfa") {
 
@@ -24,25 +19,25 @@
     <ul class="pager">
       @currentPage.prev.map { page =>
 
-              <li class="next">
-                  <a href="@link(page)">Eski Gönderiler &rarr;</a>
-              </li>
+            <li class="previous">
+              <a href="@link(page)">&larr; Yeni Gönderiler</a>
+            </li>
 
       }.getOrElse{
           @** Do not show pager **@
       }
       @currentPage.next.map{ page =>
 
-              <li class="previous">
-                  <a href="@link(page)">&larr; Yeni Gönderiler</a>
-              </li>
+            <li class="next">
+                <a href="@link(page)">Eski Gönderiler &rarr;</a>
+            </li>
 
       }.getOrElse{
           @** Do not show pager **@
       }
     </ul>
     }.getOrElse{
-        <h1>Yayınlanmış hiçbir gönderiniz bulunmamaktadır!</h1>
+        <h1>Bu sayfada yayınlanmış hiçbir gönderiniz bulunmamaktadır!</h1>
     }
             </div>
         </div>

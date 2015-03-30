@@ -37,16 +37,17 @@ object Posts extends DAO{
     val df:DateFormat = new SimpleDateFormat("dd MMMMM yyyy")
     val cal:Calendar = Calendar.getInstance()
       cal.setTimeInMillis(time)
-      return df.format(cal.getTime)
+      df.format(cal.getTime)
   }
 
-  def list(page: Int = 0, pageSize: Int = 2, orderBy: Int = 1): Page[Post] = {
+  def list(page: Int = 0, pageSize: Int = 2): Page[Post] = {
   DB.withTransaction{ implicit s =>
     val offset = pageSize * page
     val query =
       (for {
         (posts, users) <- posts leftJoin users on (_.userId === _.id)
       } yield (posts))
+        .sortBy(_.date.desc)
         .drop(offset)
         .take(pageSize)
 
@@ -76,13 +77,15 @@ object Posts extends DAO{
     }
   }
 
-  /**
-   * Delete a computer
-   * @param id
-   */
   def delete(id: Long) {
     DB.withTransaction{ implicit session =>
       posts.filter(_.id === id).delete
+    }
+  }
+
+  def findById(id: Long) = {
+    DB.withTransaction { implicit session =>
+      posts.filter(_.id === id).first
     }
   }
 }

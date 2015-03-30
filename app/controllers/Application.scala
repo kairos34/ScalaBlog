@@ -11,10 +11,9 @@ import scala.concurrent.ExecutionContext.Implicits.global
 
 object Application extends Controller with LoginLogout with AuthConfigImpl {
 
-  def index(page: Int, orderBy: Int) = Action { implicit rs =>
+  def index(page: Int) = Action { implicit rs =>
       Ok(views.html.index(
-        Posts.list(page = page, orderBy = orderBy),
-        orderBy
+        Posts.list(page = page)
       ))
   }
 
@@ -27,7 +26,7 @@ object Application extends Controller with LoginLogout with AuthConfigImpl {
   }
 
   def blog(id:Long) = Action { implicit request =>
-    Ok("Blog id is="+id)
+    Ok(views.html.post(Posts.findById(id)))
   }
 
   def sendMail = Action {

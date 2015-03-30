@@ -3,7 +3,7 @@
 # ~~~~
 
 # Home page
-GET         /                    controllers.Application.index(p:Int ?= 0, s:Int ?= 2)
+GET         /                    controllers.Application.index(p:Int ?= 0)
 
 GET         /login               controllers.Application.login
 POST        /login               controllers.Application.authenticate
