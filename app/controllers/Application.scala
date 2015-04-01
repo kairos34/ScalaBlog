@@ -1,6 +1,7 @@
 package controllers
 
-import jp.t2v.lab.play2.auth.LoginLogout
+import jp.t2v.lab.play2.auth.{AuthElement, LoginLogout}
+import models.Role.Administrator
 import models._
 import play.api.data.Form
 import play.api.mvc._
@@ -9,7 +10,7 @@ import play.api.data.Forms._
 import scala.concurrent.Future
 import scala.concurrent.ExecutionContext.Implicits.global
 
-object Application extends Controller with LoginLogout with AuthConfigImpl {
+object Application extends Controller with LoginLogout with AuthConfigImpl with AuthElement {
 
   def index(page: Int) = Action { implicit rs =>
       Ok(views.html.index(
@@ -80,7 +81,7 @@ object Application extends Controller with LoginLogout with AuthConfigImpl {
     )
   }
 
-  def adminPage = Action {
+  def adminPage = StackAction(AuthorityKey->Administrator) { implicit request =>
     Ok("Admin page will be here")
   }
 
