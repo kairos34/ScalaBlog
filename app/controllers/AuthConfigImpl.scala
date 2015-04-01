@@ -71,7 +71,7 @@ trait AuthConfigImpl extends AuthConfig {
    * If the user is not logged in and tries to access a protected resource then redirct them as follows:
    */
   def authenticationFailed(request: RequestHeader)(implicit ctx: ExecutionContext): Future[Result] =
-    Future.successful(Redirect(routes.Application.login))
+    Future.successful(Redirect(routes.Application.login).flashing("error"->"İlk önce oturum açmalısın!"))
 
   /**
    * If authorization failed (usually incorrect password) redirect the user as follows:

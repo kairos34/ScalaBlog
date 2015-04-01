@@ -30,8 +30,7 @@ object Application extends Controller with LoginLogout with AuthConfigImpl with 
     Ok(views.html.post(Posts.findById(id)))
   }
 
-  def sendMail = Action {
-    implicit request =>
+  def sendMail = Action { implicit request =>
       Message.messageForm.bindFromRequest.fold(
         formwitherrors => BadRequest(views.html.contact(formwitherrors)),
         messageContent => {

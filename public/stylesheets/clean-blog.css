@@ -25,6 +25,9 @@ h6 {
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-weight: 800;
 }
+h4 {
+    color: #7ac143;
+}
 a {
   color: #404040;
 }
@@ -392,4 +395,21 @@ img::-moz-selection {
 }
 body {
   webkit-tap-highlight-color: #7ac143;
+}
+
+.img-circular1
+{
+    width: 200px;
+    height: 200px;
+    background-image: url('http://m.c.lnkd.licdn.com/media/p/4/000/161/3c2/1bd7e49.jpg');
+    background-size: cover;
+    display: block;
+    margin-bottom:20px;
+    margin-top: 20px;
+    border-radius: 100px;
+    -webkit-border-radius: 100px;
+    -moz-border-radius: 100px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+    -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+    -moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
 }
