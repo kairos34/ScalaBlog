@@ -4,7 +4,7 @@
 
 @implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
 
-@inputText(messageForm("Name"), '_label -> "İsim", 'class -> "form-control")
-@inputText(messageForm("Email"), '_label -> "Email", 'class -> "form-control")
-@inputText(messageForm("Phone"), '_label -> "Telefon", 'class -> "form-control")
-@textarea(messageForm("Message"), '_label -> "Mesaj", 'class -> "form-control", 'rows -> 5, 'cols -> 60, 'style -> "resize:none")
+@inputText(messageForm("Name"), '_label -> "İsim", 'placeholder ->"Adınız ve Soyadınız..." , 'class -> "form-control")
+@inputText(messageForm("Email"), '_label -> "Email", 'placeholder ->"Email Adresiniz..." , 'class -> "form-control")
+@inputText(messageForm("Phone"), '_label -> "Telefon", 'placeholder ->"Telefon Numaranız..." , 'class -> "form-control")
+@textarea(messageForm("Message"), '_label -> "Mesaj", 'class -> "form-control", 'placeholder ->"Mesajınız..." , 'rows -> 5, 'cols -> 60, 'style -> "resize:none")
