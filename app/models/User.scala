@@ -1,5 +1,7 @@
 package models
 
+import utils.HashFactory
+
 import scala.language.postfixOps
 import play.api.db.slick.Config.driver.simple._
 import scala.slick.lifted.Tag
@@ -34,7 +36,7 @@ object Users extends DAO{
 
   def authenticate(email:String,password:String):Option[User] = {
     DB.withTransaction{ implicit session =>
-      users.filter(u => u.email === email && u.password === password).firstOption
+      users.filter(u => u.email === email && u.password === HashFactory.hash(password)).firstOption
     }
   }
 
