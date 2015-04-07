@@ -65,7 +65,7 @@ trait AuthConfigImpl extends AuthConfig {
    * Where to redirect the user after logging out
    */
   def logoutSucceeded(request: RequestHeader)(implicit ctx: ExecutionContext): Future[Result] =
-    Future.successful(Redirect(routes.Application.login))
+    Future.successful(Redirect(routes.Application.login).flashing("success"->"Başarılı bir şekilde oturum sonlandırıldı!"))
 
   /**
    * If the user is not logged in and tries to access a protected resource then redirct them as follows:

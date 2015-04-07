@@ -1,0 +1,118 @@
+@(title: String,user:User)(content: Html)
+
+<!DOCTYPE html>
+<html>
+
+    <head>
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="Alper">
+
+        <title>Admin Paneli</title>
+
+        <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.ico")">
+            <!-- Bootstrap Core CSS -->
+        <link rel="stylesheet" href="@routes.Assets.at("stylesheets/bootstrap.min.css")">
+            <!-- Custom CSS -->
+        <link rel="stylesheet" href="@routes.Assets.at("stylesheets/sb-admin.css")">
+            <!-- Custom Fonts -->
+        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+            <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+            <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+            <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    </head>
+
+    <body>
+
+        <div id="wrapper">
+
+                <!-- Navigation -->
+            <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="@routes.Application.adminPage()">Admin Paneli</a>
+                </div>
+                    <!-- Top Menu Items -->
+                <ul class="nav navbar-right top-nav">
+                    <li class="dropdown">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> @user.fullname <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="#"><i class="fa fa-fw fa-gear"></i> Ayarlar</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="@routes.Application.logout()"><i class="fa fa-fw fa-power-off"></i> Çıkış Yap</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                    <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+                <div class="collapse navbar-collapse navbar-ex1-collapse">
+                    <ul class="nav navbar-nav side-nav">
+                        <li>
+                            <a href="javascript:;" data-toggle="collapse" data-target="#posts"><i class="fa fa-fw fa-archive"></i> Gönderi İşlemleri <i class="fa fa-fw fa-caret-down"></i></a>
+                            <ul id="posts" class="collapse">
+                                <li>
+                                    <a href="#"><i class="fa fa-fw fa-file-text-o"></i> Gönderi Ekle</a>
+                                </li>
+                                <li>
+                                    <a href="@routes.Application.posts()"><i class="fa fa-fw fa-pencil-square-o"></i> Gönderi Düzenle</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript:;" data-toggle="collapse" data-target="#users"><i class="fa fa-fw fa-users"></i> Kullanıcı İşlemleri <i class="fa fa-fw fa-caret-down"></i></a>
+                            <ul id="users" class="collapse">
+                                <li>
+                                    <a href="#"><i class="fa fa-fw fa-user-plus"></i> Kullanıcı Ekle</a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="fa fa-fw fa-pencil-square-o"></i> Kullanıcı Düzenle</a>
+                                </li>
+                            </ul>
+                        </li>
+                        @** <li class="active"> **@
+                    </ul>
+                </div>
+                    <!-- /.navbar-collapse -->
+            </nav>
+
+            <div id="page-wrapper">
+
+                <div class="container-fluid">
+
+                @content
+
+                </div>
+                    <!-- /.container-fluid -->
+
+            </div>
+                <!-- /#page-wrapper -->
+
+        </div>
+            <!-- /#wrapper -->
+
+            <!-- jQuery -->
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+
+            <!-- Bootstrap Core JavaScript -->
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <script src="@routes.Assets.at("javascripts/clean-blog.js")"></script>
+    </body>
+
+</html>

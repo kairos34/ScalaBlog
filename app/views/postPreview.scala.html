@@ -1,10 +1,14 @@
-@(post:Post)
+@(post:Post,blogPage:Boolean)
 
 @**************************************************
 * Generate post preview from post *
 **************************************************@
 <div class="post-preview">
+    @if(blogPage){
     <a href="@routes.Application.blog(post.id)">
+    }else{
+    <a href="@routes.Application.edit(post.id)">
+    }
         <h2 class="post-title">
         @post.title
         </h2>

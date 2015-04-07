@@ -18,6 +18,13 @@ object Application extends Controller with LoginLogout with AuthConfigImpl with 
       ))
   }
 
+  def posts(page: Int) = StackAction(AuthorityKey->Administrator) { implicit rs =>
+    val user = loggedIn
+      Ok(views.html.postList(
+        Posts.list(page = page,pageSize=10),user
+      ))
+  }
+
   def about = Action {
     Ok(views.html.about.render())
   }
@@ -28,6 +35,12 @@ object Application extends Controller with LoginLogout with AuthConfigImpl with 
 
   def blog(id:Long) = Action { implicit request =>
     Ok(views.html.post(Posts.findById(id)))
+  }
+
+  def edit(id:Long) = StackAction(AuthorityKey->Administrator) { implicit request =>
+    val post = Posts.findById(id)
+    val user = loggedIn
+    Ok(views.html.edit(Posts.editForm.fill(post),user))
   }
 
   def sendMail = Action { implicit request =>
@@ -44,7 +57,7 @@ object Application extends Controller with LoginLogout with AuthConfigImpl with 
   /** Your application's login form.  Alter it to fit your application */
   val loginForm = Form {
     mapping("email" -> email, "password" -> nonEmptyText)(Users.authenticate)(_.map(u => (u.email, "")))
-      .verifying("Invalid email or password", result => result.isDefined)
+      .verifying("Kullanıcı adı veya şifre hatalı!", result => result.isDefined)
   }
 
   /** Alter the login page action to suit your application. */
@@ -63,7 +76,6 @@ object Application extends Controller with LoginLogout with AuthConfigImpl with 
    *   ))
    */
   def logout = Action.async { implicit request =>
-    // do something...
     gotoLogoutSucceeded
   }
 
@@ -81,7 +93,8 @@ object Application extends Controller with LoginLogout with AuthConfigImpl with 
   }
 
   def adminPage = StackAction(AuthorityKey->Administrator) { implicit request =>
-    Ok("Admin page will be here")
+    val user = loggedIn
+    Ok(views.html.admin(user))
   }
 
 }

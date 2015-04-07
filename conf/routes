@@ -7,11 +7,14 @@ GET         /                    controllers.Application.index(p:Int ?= 0)
 
 GET         /login               controllers.Application.login
 POST        /login               controllers.Application.authenticate
+GET         /logout              controllers.Application.logout
 GET         /about               controllers.Application.about
 GET         /contact             controllers.Application.contact
 POST        /contact             controllers.Application.sendMail
 GET         /blog/:id            controllers.Application.blog(id:Long)
+GET         /edit/:id            controllers.Application.edit(id:Long)
 GET         /admin               controllers.Application.adminPage
+GET         /posts               controllers.Application.posts(p:Int ?= 0)
 
 
 # Map static resources from the /public folder to the /assets URL path

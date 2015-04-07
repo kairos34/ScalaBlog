@@ -14,7 +14,7 @@
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
     @Option(currentPage.items).filterNot(_.isEmpty).map { posts =>
             @posts.map{ post =>
-                            @postPreview(post)
+                            @postPreview(post,true)
             }
     <ul class="pager">
       @currentPage.prev.map { page =>

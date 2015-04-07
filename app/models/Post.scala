@@ -2,6 +2,8 @@ package models
 
 import java.text.{SimpleDateFormat, DateFormat}
 import java.util.{Calendar}
+import play.api.data.Form
+import play.api.data.Forms._
 import play.api.db.slick.DB
 import scala.language.postfixOps
 import play.api.db.slick.Config.driver.simple._
@@ -31,6 +33,17 @@ class Posts(tag: Tag) extends Table[Post](tag,"post"){
 }
 
 object Posts extends DAO{
+
+  val editForm: Form[Post] = Form(
+    mapping(
+      "Id" -> longNumber,
+      "UserId" -> longNumber,
+      "Date" -> longNumber,
+      "Title" -> nonEmptyText,
+      "SubTitle" -> nonEmptyText,
+      "Content" -> nonEmptyText
+    )(Post.apply)(Post.unapply)
+  )
 
  /** Long to date for posting date **/
   def convertDate(time:Long):String = {
