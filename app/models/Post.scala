@@ -53,7 +53,7 @@ object Posts extends DAO{
       df.format(cal.getTime)
   }
 
-  def list(page: Int = 0, pageSize: Int = 2): Page[Post] = {
+  def list(page: Int = 0, pageSize: Int = 1): Page[Post] = {
   DB.withTransaction{ implicit s =>
     val offset = pageSize * page
     val query =
@@ -68,6 +68,23 @@ object Posts extends DAO{
     val result = query.list
 
     Page(result, page, offset, totalRows)
+  }
+  }
+
+  def takeTriple(id:Long) = {
+    DB.withTransaction{ implicit s =>
+      val query =
+        (for {
+          (posts, users) <- posts leftJoin users on (_.userId === _.id)
+        } yield (posts))
+          .sortBy(_.date.desc)
+      val list = query.list
+      list.foreach(x=>println(x.title))
+      val index = list.indexWhere(_.id==id)
+      println(index)
+      val triple = list.slice(index-1,index+2)
+      println(triple)
+      triple
   }
   }
 

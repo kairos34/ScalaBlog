@@ -16,6 +16,7 @@
         <link rel="stylesheet" href="@routes.Assets.at("stylesheets/bootstrap.min.css")">
             <!-- Custom CSS -->
         <link rel="stylesheet" href="@routes.Assets.at("stylesheets/clean-blog.css")">
+        <link rel="stylesheet" href="@routes.Assets.at("stylesheets/gist-theme.css")">
             <!-- Custom Fonts -->
         <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
         <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
@@ -30,7 +31,6 @@
 
     </head>
     <body>
-
         <!--Fixed navbar-->
         @navbar()
 
@@ -45,8 +45,14 @@
         <script type="text/javascript" src="http://arrow.scrolltotop.com/arrow53.js"></script>
         <noscript>Not seeing a <a href="http://www.scrolltotop.com/">Scroll to Top Button</a>? Go to our FAQ page for more info.</noscript>
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <script src="https://raw.githubusercontent.com/moski/gist-Blogger/master/public/gistLoader.js" type="text/javascript"></script>
             <!-- Custom Theme JavaScript -->
             @** Navigation Scripts to Show Header on Scroll-Up **@
         <script src="@routes.Assets.at("javascripts/clean-blog.js")"></script>
+       <script type="text/javascript">
+        $( document ).ready(function() {
+        $("#content" ).html($("#content" ).text());
+        });
+        </script>
     </body>
 </html>

@@ -4,9 +4,9 @@
 
 @implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
 
-@inputText(editForm("Id"), '_label -> "Gönderi Id", 'class -> "form-control" ,'readonly -> "readonly")
-@inputText(editForm("UserId"), '_label -> "Kullanıcı Id" , 'class -> "form-control",'readonly -> "readonly")
-@inputText(editForm("Date"), '_label -> "Yayınlandığı Tarih",  'class -> "form-control",'readonly -> "readonly")
+@inputText(editForm("Id"), '_label -> "Gönderi Id", 'class -> "form-control" ,'hideIt->true,'style -> "display: none")
+@inputText(editForm("UserId"), '_label -> "Kullanıcı Id" , 'class -> "form-control",'hideIt->true,'style -> "display: none")
+@inputText(editForm("Date"), '_label -> "Yayınlandığı Tarih",  'class -> "form-control",'hideIt->true,'style -> "display: none")
 @inputText(editForm("Title"), '_label -> "Başlık",  'class -> "form-control")
 @inputText(editForm("SubTitle"), '_label -> "Alt Başlık",  'class -> "form-control")
 @textarea(editForm("Content"), '_label -> "İçerik", 'class -> "form-control" , 'rows -> 30, 'cols -> 60, 'style -> "resize:none")

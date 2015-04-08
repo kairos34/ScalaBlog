@@ -1,14 +1,14 @@
-@(post:Post)
+@(posts:List[Post])
 
-@main(post.title){
+@main(posts(1).title){
 
-    @postHeader("/images/home-bg.jpg",post)
-
+    @postHeader("/images/home-bg.jpg",posts(1))
+@** fix first post error! **@
 <article>
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                @post.content
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1" id="content">
+                @posts(1).content
             </div>
         </div>
     </div>

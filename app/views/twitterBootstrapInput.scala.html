@@ -3,10 +3,14 @@
 @**************************************************
 * Generate input according twitter bootsrap rules *
 **************************************************@
-<div class="form-group @if(elements.hasErrors) {has-error}">
-    <label for="@elements.id" class="col-sm-2 control-label">@elements.label</label>
-    <div class="col-sm-10">
-        @elements.input
-        <span class="help-block">@elements.infos.mkString(", ")</span>
+@if(elements.args.contains('hideIt)) {
+    @elements.input
+}else{
+    <div class="form-group @if(elements.hasErrors) {has-error}">
+        <label for="@elements.id" class="col-sm-2 control-label">@elements.label</label>
+        <div class="col-sm-10">
+            @elements.input
+            <span class="help-block">@elements.infos.mkString(", ")</span>
+        </div>
     </div>
-</div>
+}

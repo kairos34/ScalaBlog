@@ -14,7 +14,7 @@ object Application extends Controller with LoginLogout with AuthConfigImpl with 
 
   def index(page: Int) = Action { implicit rs =>
       Ok(views.html.index(
-        Posts.list(page = page)
+        Posts.list(page = page,pageSize=2)
       ))
   }
 
@@ -34,13 +34,25 @@ object Application extends Controller with LoginLogout with AuthConfigImpl with 
   }
 
   def blog(id:Long) = Action { implicit request =>
-    Ok(views.html.post(Posts.findById(id)))
+    Ok(views.html.post(Posts.takeTriple(id)))
+    //Ok(views.html.post(Posts.findById(id)))
   }
 
   def edit(id:Long) = StackAction(AuthorityKey->Administrator) { implicit request =>
     val post = Posts.findById(id)
     val user = loggedIn
     Ok(views.html.edit(Posts.editForm.fill(post),user))
+  }
+
+  def editPost = StackAction(AuthorityKey->Administrator) { implicit request =>
+    val user = loggedIn
+    Posts.editForm.bindFromRequest.fold(
+       formWithErrors => BadRequest(views.html.edit(formWithErrors,user)),
+       editedPost => {
+         Posts.update(editedPost.id,editedPost)
+         Redirect(routes.Application.edit(editedPost.id)).flashing("success"->"Gönderi içeriği başarıyla güncellendi!")
+       }
+    )
   }
 
   def sendMail = Action { implicit request =>

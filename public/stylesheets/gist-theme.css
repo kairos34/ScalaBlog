@@ -1,0 +1,16 @@
+.gist .gist-file .gist-data .line-pre{font-family:Consolas, 'Liberation Mono', Courier, monospace !important}
+.gist .gist-file{font-family:Consolas, 'Liberation Mono', Courier, monospace !important}
+.gist .gist-file .gist-meta{font-family:'Helvetica Neue', Helvetica, arial, freesans, clean, sans-serif !important}
+.gist .gist-file{border-color:#7ac143 !important}
+.gist .gist-file .gist-data .line-numbers{border-right-color:#7ac143 !important}
+.gist .gist-file .gist-data{border-bottom-color:#7ac143 !important}
+.gist .gist-file .gist-data .line-numbers{background:#7ac143 !important}
+.gist .gist-file .gist-data{background:#f8f8ff !important}
+.gist .gist-file .gist-meta{background:#e8e8e8 !important}
+.gist .gist-file .gist-data .line-numbers{color:#ffffff !important}
+.gist .gist-file .gist-meta{color:#999999 !important}
+.gist .gist-file .gist-meta a{color:#666666 !important}
+.gist .gist-file .gist-data .line-numbers{text-shadow:none !important}
+.gist .gist-file .gist-meta{text-shadow:1px 1px rgba(255, 255, 255, .8) !important}
+.gist .gist-file .gist-data {border-radius: 2px 2px 0 0 !important}
+.gist .gist-file .gist-meta {border-radius: 0 0 2px 2px !important}
