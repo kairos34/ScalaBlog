@@ -12,9 +12,14 @@ import scala.concurrent.ExecutionContext.Implicits.global
 
 object Application extends Controller with LoginLogout with AuthConfigImpl with AuthElement {
 
+  /**
+   * Takes page parameter to drop post list...
+   * @param page
+   * @return
+   */
   def index(page: Int) = Action { implicit rs =>
       Ok(views.html.index(
-        Posts.list(page = page,pageSize=2)
+        Posts.list(page = page,pageSize=5)
       ))
   }
 
@@ -34,8 +39,7 @@ object Application extends Controller with LoginLogout with AuthConfigImpl with 
   }
 
   def blog(id:Long) = Action { implicit request =>
-    Ok(views.html.post(Posts.takeTriple(id)))
-    //Ok(views.html.post(Posts.findById(id)))
+    Ok(views.html.post(Posts.takeTriple(id),Posts.index==0,Posts.index==Posts.postCount-1))
   }
 
   def edit(id:Long) = StackAction(AuthorityKey->Administrator) { implicit request =>

@@ -406,6 +406,7 @@ body {
     display: block;
     margin-bottom:20px;
     margin-top: 20px;
+    margin-left: 5px;
     border-radius: 100px;
     -webkit-border-radius: 100px;
     -moz-border-radius: 100px;

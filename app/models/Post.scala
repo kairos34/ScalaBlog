@@ -34,6 +34,15 @@ class Posts(tag: Tag) extends Table[Post](tag,"post"){
 
 object Posts extends DAO{
 
+  val postList =
+    (for {
+      (posts, users) <- posts leftJoin users on (_.userId === _.id)
+    } yield (posts))
+      .sortBy(_.date.desc)
+
+  var index = 0
+  var postCount = 0
+
   val editForm: Form[Post] = Form(
     mapping(
       "Id" -> longNumber,
@@ -56,11 +65,7 @@ object Posts extends DAO{
   def list(page: Int = 0, pageSize: Int = 1): Page[Post] = {
   DB.withTransaction{ implicit s =>
     val offset = pageSize * page
-    val query =
-      (for {
-        (posts, users) <- posts leftJoin users on (_.userId === _.id)
-      } yield (posts))
-        .sortBy(_.date.desc)
+    val query = postList
         .drop(offset)
         .take(pageSize)
 
@@ -73,17 +78,11 @@ object Posts extends DAO{
 
   def takeTriple(id:Long) = {
     DB.withTransaction{ implicit s =>
-      val query =
-        (for {
-          (posts, users) <- posts leftJoin users on (_.userId === _.id)
-        } yield (posts))
-          .sortBy(_.date.desc)
-      val list = query.list
+      val list = postList.list
       list.foreach(x=>println(x.title))
-      val index = list.indexWhere(_.id==id)
-      println(index)
+      index = list.indexWhere(_.id==id)
+      postCount = list.length
       val triple = list.slice(index-1,index+2)
-      println(triple)
       triple
   }
   }

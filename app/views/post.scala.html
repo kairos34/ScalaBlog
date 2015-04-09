@@ -1,16 +1,58 @@
-@(posts:List[Post])
+@(posts:List[Post],isFirst:Boolean,isLast:Boolean)
 
-@main(posts(1).title){
+@if(isFirst) {
+    @main(posts(0).title) {
 
-    @postHeader("/images/home-bg.jpg",posts(1))
-@** fix first post error! **@
-<article>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1" id="content">
-                @posts(1).content
+        @postHeader("/images/home-bg.jpg", posts(0))
+        @** fix first post error! **@
+        <article>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1" id="content">
+                    @posts(0).content
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <hr>
+                         <ul class="pager">
+                                 <li class="next">
+                                    <a href="@routes.Application.blog(posts(1).id)" data-toggle="tooltip" data-placement="top" title="@posts(1).title">Sonraki Gönderi &rarr;</a>
+                                 </li>
+                         </ul>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-</article>
+        </article>
+    }
+}else {
+    @main(posts(1).title) {
+
+        @postHeader("/images/home-bg.jpg", posts(1))
+        @** fix first post error! **@
+        <article>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1" id="content">
+                    @posts(1).content
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                        <hr>
+                        <ul class="pager">
+                            <li class="previous">
+                                <a href="@routes.Application.blog(posts(0).id)" data-toggle="tooltip" data-placement="top" title="@posts(0).title">&larr; Önceki Gönderi</a>
+                            </li>
+                            @if(!isLast) {
+                                <li class="next">
+                                    <a href="@routes.Application.blog(posts(2).id)" data-toggle="tooltip" data-placement="top" title="@posts(2).title">Sonraki Gönderi &rarr;</a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </article>
+    }
 }
