@@ -4,13 +4,18 @@ import jp.t2v.lab.play2.auth.{AuthElement, LoginLogout}
 import models.Role.Administrator
 import models._
 import play.api.data.Form
+import play.api.libs.json.Json
+import play.api.libs.ws.WS
 import play.api.mvc._
 import play.api.data.Forms._
 
 import scala.concurrent.Future
 import scala.concurrent.ExecutionContext.Implicits.global
+import play.api.Play.current
 
 object Application extends Controller with LoginLogout with AuthConfigImpl with AuthElement {
+
+  private val SECRET = "6Le0JQUTAAAAADVcJyf76K3qvhUdF4ke6xwA10QS"
 
   /**
    * Takes page parameter to drop post list...
@@ -39,7 +44,7 @@ object Application extends Controller with LoginLogout with AuthConfigImpl with 
   }
 
   def blog(id:Long) = Action { implicit request =>
-    Ok(views.html.post(Posts.takeTriple(id),Posts.index==0,Posts.index==Posts.postCount-1))
+    Ok(views.html.post(Posts.postNavigator(id)))
   }
 
   def edit(id:Long) = StackAction(AuthorityKey->Administrator) { implicit request =>
@@ -59,14 +64,24 @@ object Application extends Controller with LoginLogout with AuthConfigImpl with 
     )
   }
 
-  def sendMail = Action { implicit request =>
+  def sendMail = Action.async { implicit request =>
       Message.messageForm.bindFromRequest.fold(
-        formwitherrors => BadRequest(views.html.contact(formwitherrors)),
+        formwitherrors => Future.successful(BadRequest(views.html.contact(formwitherrors))),
         messageContent => {
-          println(messageContent.email)
-          //TODO sent mail to the blog owner!!
-          Redirect(routes.Application.contact()).flashing("success"->"Mesajınız başarıyla yollandı!")
-        }
+          val g_recaptcha_response = request.body.asFormUrlEncoded.get("g-recaptcha-response")
+          WS.url("https://www.google.com/recaptcha/api/siteverify").post(Map("secret"->Seq(SECRET),"response"->g_recaptcha_response)) map {
+            response => {
+              val success = (response.json \ "success").as[Boolean]
+              if(success){
+                println(messageContent)
+                //TODO sent mail to the blog owner!!
+                Redirect(routes.Application.contact()).flashing("success"->"Mesajınız başarıyla yollandı!")
+              }
+              else
+                Redirect(routes.Application.contact()).flashing("error"->"Robot olmadığını kanıtlaman gerek!")
+              }
+            }
+          }
       )
   }
 

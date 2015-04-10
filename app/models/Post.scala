@@ -20,6 +20,7 @@ case class Page[A](items: Seq[A], page: Int, offset: Long, total: Long) {
 }
 
 case class Post(id:Long,userId:Long,date:Long,title:String,subTitle:String,content:String)
+case class PostNavigator(post:Post,hasNext:Boolean,hasPrev:Boolean,nextTitle:String,prevTitle:String,nextId:Long,prevId:Long)
 
 class Posts(tag: Tag) extends Table[Post](tag,"post"){
   def id = column[Long]("id",O.PrimaryKey,O.AutoInc)
@@ -39,9 +40,6 @@ object Posts extends DAO{
       (posts, users) <- posts leftJoin users on (_.userId === _.id)
     } yield (posts))
       .sortBy(_.date.desc)
-
-  var index = 0
-  var postCount = 0
 
   val editForm: Form[Post] = Form(
     mapping(
@@ -76,14 +74,25 @@ object Posts extends DAO{
   }
   }
 
-  def takeTriple(id:Long) = {
+  def postNavigator(id:Long) = {
     DB.withTransaction{ implicit s =>
       val list = postList.list
-      list.foreach(x=>println(x.title))
-      index = list.indexWhere(_.id==id)
-      postCount = list.length
-      val triple = list.slice(index-1,index+2)
-      triple
+      val index = list.indexWhere(_.id==id)
+      var nextTitle = ""
+      var nextId = 0l
+      var prevTitle = ""
+      var prevId = 0l
+      val hasNext = index+1<list.length
+      val hasPrev = index>0
+      if(hasPrev){
+        prevTitle = list(index-1).title
+        prevId = list(index-1).id
+      }
+      if(hasNext){
+        nextTitle = list(index+1).title
+        nextId = list(index+1).id
+      }
+      new PostNavigator(list(index),hasNext,hasPrev,nextTitle,prevTitle,nextId,prevId)
   }
   }
 

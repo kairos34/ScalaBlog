@@ -1,58 +1,56 @@
-@(posts:List[Post],isFirst:Boolean,isLast:Boolean)
+@(postNavigator: PostNavigator)
 
-@if(isFirst) {
-    @main(posts(0).title) {
+@main(postNavigator.post.title) {
 
-        @postHeader("/images/home-bg.jpg", posts(0))
+        @postHeader("/images/home-bg.jpg", postNavigator.post)
         @** fix first post error! **@
         <article>
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1" id="content">
-                    @posts(0).content
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                        <hr>
-                         <ul class="pager">
-                                 <li class="next">
-                                    <a href="@routes.Application.blog(posts(1).id)" data-toggle="tooltip" data-placement="top" title="@posts(1).title">Sonraki Gönderi &rarr;</a>
-                                 </li>
-                         </ul>
-                    </div>
-                </div>
-            </div>
-        </article>
-    }
-}else {
-    @main(posts(1).title) {
-
-        @postHeader("/images/home-bg.jpg", posts(1))
-        @** fix first post error! **@
-        <article>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1" id="content">
-                    @posts(1).content
+                    @postNavigator.post.content
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                         <hr>
                         <ul class="pager">
+                        @if(postNavigator.hasPrev){
                             <li class="previous">
-                                <a href="@routes.Application.blog(posts(0).id)" data-toggle="tooltip" data-placement="top" title="@posts(0).title">&larr; Önceki Gönderi</a>
+                                <a href="@routes.Application.blog(postNavigator.prevId)" data-toggle="tooltip" data-placement="top" title="@postNavigator.prevTitle">&larr; Önceki Gönderi</a>
                             </li>
-                            @if(!isLast) {
-                                <li class="next">
-                                    <a href="@routes.Application.blog(posts(2).id)" data-toggle="tooltip" data-placement="top" title="@posts(2).title">Sonraki Gönderi &rarr;</a>
-                                </li>
+                            }
+                        @if(postNavigator.hasNext) {
+                            <li class="next">
+                                <a href="@routes.Application.blog(postNavigator.nextId)" data-toggle="tooltip" data-placement="top" title="@postNavigator.nextTitle">Sonraki Gönderi &rarr;</a>
+                            </li>
                             }
                         </ul>
                     </div>
                 </div>
             </div>
+        <br>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <h2>Yorum Yap</h2>
+                        <div id="disqus_thread"></div>
+                    </div>
+                </div>
+        </div>
+
+        <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES * * */
+        var disqus_shortname = 'alperozaslan';
+        var disqus_identifier = @postNavigator.post.id;
+            
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
         </article>
-    }
 }

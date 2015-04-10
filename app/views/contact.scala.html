@@ -15,8 +15,16 @@
                         @message
                     </div>
                 }
+                @flash.get("error").map { message =>
+                    <div class="alert alert-dismissable alert-danger">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        @message
+                    </div>
+                }
                     @helper.form(routes.Application.sendMail()) {
                         <fieldset>@formElements(form)</fieldset>
+                        <br>
+                        <div class="g-recaptcha" data-sitekey="6Le0JQUTAAAAAKAWuMig_cIihv-azGyr69X5CRAQ" data-theme="dark"></div>
                         <br>
                         <div class="row">
                             <div class="form-group col-xs-12">
