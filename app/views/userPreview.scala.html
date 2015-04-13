@@ -1,0 +1,18 @@
+@(user: User)
+
+@**************************************************
+* Generate post preview from post *
+**************************************************@
+<div class="post-preview">
+        <a href="@routes.Application.editUser(user.id)">
+<h2 class="post-title">
+@user.fullname
+</h2>
+
+<h3 class="post-subtitle">
+@user.email
+</h3>
+
+</a>
+</div>
+<hr>

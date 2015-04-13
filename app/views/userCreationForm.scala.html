@@ -1,0 +1,12 @@
+@(creationForm: Form[UserForm])
+
+@import helper._
+
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) }
+
+@inputText(creationForm("Id"), '_label -> "Kullanıcı Id", 'class -> "form-control" ,'hideIt->true,'style -> "display: none")
+@inputText(creationForm("FullName"), '_label -> "Kullanıcı İsmi",'class -> "form-control")
+@inputText(creationForm("Email"), '_label->"Email",'class-> "form-control" )
+@inputPassword(creationForm("Password"), '_label->"Şifre",'class-> "form-control")
+@inputPassword(creationForm("Confirm Password"), '_label->"Şifre Onay", 'class->"form-control")
+@select(creationForm("Permission"),options = Seq("Administrator"->"Administrator","NormalUser"->"NormalUser"),'label -> "Yetki", 'class -> "form-control" )

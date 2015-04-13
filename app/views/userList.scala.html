@@ -1,0 +1,44 @@
+@(currentPage: Page[User],user:User)(implicit flash: play.api.mvc.Flash)
+
+@****************************************
+* Helper generating navigation links    *
+****************************************@
+@link(newPage: Int) = @{routes.Application.users(newPage)}
+
+@adminTemplate("Kullanıcı Listesi",user) {
+
+    @flash.get("success").map { message =>
+        <div class="alert alert-dismissable alert-success">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            @message
+        </div>
+    }
+
+    @Option(currentPage.items).filterNot(_.isEmpty).map { users =>
+        @users.map{ user =>
+            @userPreview(user)
+        }
+    <ul class="pager">
+        @currentPage.prev.map { page =>
+
+        <li class="previous">
+            <a href="@link(page)">&larr; Önceki Kullanıcılar</a>
+        </li>
+
+        }.getOrElse{
+            @** Do not show pager **@
+        }
+        @currentPage.next.map{ page =>
+
+        <li class="next">
+            <a href="@link(page)">Sonraki Kullanıcılar &rarr;</a>
+        </li>
+
+        }.getOrElse{
+            @** Do not show pager **@
+        }
+    </ul>
+    }.getOrElse{
+        <h1>Bu sayfada gösterilecek kullanıcı bulunmamaktadır.</h1>
+    }
+}

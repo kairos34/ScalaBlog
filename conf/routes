@@ -12,10 +12,19 @@ GET         /about               controllers.Application.about
 GET         /contact             controllers.Application.contact
 POST        /contact             controllers.Application.sendMail
 GET         /blog/:id            controllers.Application.blog(id:Long)
-GET         /edit/:id            controllers.Application.edit(id:Long)
-POST        /edit                controllers.Application.editPost
 GET         /admin               controllers.Application.adminPage
 GET         /posts               controllers.Application.posts(p:Int ?= 0)
+GET         /editPost/:id        controllers.Application.edit(id:Long)
+POST        /editPost            controllers.Application.editPost
+POST        /deletePost          controllers.Application.deletePost(id:Long)
+GET         /addPost             controllers.Application.add
+POST        /addPost             controllers.Application.addPost
+GET         /users               controllers.Application.users(p:Int ?= 0)
+GET         /addUser             controllers.Application.addUserPage
+POST        /addUser             controllers.Application.addUser
+GET         /editUser/:id        controllers.Application.editUser(id:Long)
+POST        /editUser            controllers.Application.editUserRequest
+POST        /deleteUser          controllers.Application.deleteUser(id:Long)
 
 
 # Map static resources from the /public folder to the /assets URL path

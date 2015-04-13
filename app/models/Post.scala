@@ -23,7 +23,7 @@ case class Post(id:Long,userId:Long,date:Long,title:String,subTitle:String,conte
 case class PostNavigator(post:Post,hasNext:Boolean,hasPrev:Boolean,nextTitle:String,prevTitle:String,nextId:Long,prevId:Long)
 
 class Posts(tag: Tag) extends Table[Post](tag,"post"){
-  def id = column[Long]("id",O.PrimaryKey,O.AutoInc)
+  def id = column[Long]("id",O.PrimaryKey)
   def userId = column[Long]("user_id")
   def date = column[Long]("date")
   def title = column[String]("title")
@@ -41,7 +41,7 @@ object Posts extends DAO{
     } yield (posts))
       .sortBy(_.date.desc)
 
-  val editForm: Form[Post] = Form(
+  val postForm: Form[Post] = Form(
     mapping(
       "Id" -> longNumber,
       "UserId" -> longNumber,
@@ -109,9 +109,9 @@ object Posts extends DAO{
   }
 
   def update(id: Long, post: Post) {
-    val computerToUpdate: Post = post.copy(id)
+    val postToUpdate: Post = post.copy(id)
     DB.withTransaction{ implicit session =>
-      posts.filter(_.id === id).update(computerToUpdate)
+      posts.filter(_.id === id).update(postToUpdate)
     }
   }
 

@@ -1,5 +1,62 @@
 @(user:User)
 
 @adminTemplate("Admin Paneli",user){
+    <h4>Merhaba @user.fullname,</h4>
+    <br>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-yellow">
+                <div class="panel-heading">
+                    Gönderi Ekleme
+                </div>
+                <p>
+                    Yeni gönderi eklemek için sol taraftaki menüden Gönderi Ekle butonuna tıklaman yeterli...
+                </p>
+            </div>
+        </div>
+    </div>
 
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-green">
+                <div class="panel-heading">
+                    Gönderi Düzenleme
+                </div>
+                <p>
+                    Herhangi bir gönderiyi düzenlemek için sol taraftaki menüden Gönderi Düzenle butonuta tıklaman yeterli...
+                </p>
+                <p>
+                    Silmek istediğin gönderiyi de buradan seçip açılan sayfadaki Sil butonuna tıklayarak silebilirsin...
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-red">
+                <div class="panel-heading">
+                    Kullanıcı Ekleme
+                </div>
+                <p>
+                    Yeni kullanıcı eklemek için sol taraftaki menüden Kullanıcı Ekle butonuna tıklaman yeterli...
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    Kullanıcı Düzenleme
+                </div>
+                <p>
+                    Herhangi bir kullanıcıyı düzenlemek için sol taraftaki menüden Kullanıcı Düzenle butonuta tıklaman yeterli...
+                </p>
+
+                <p>
+                    Silmek istediğin kullanıcıyı da buradan seçip açılan sayfadaki Sil butonuna tıklayarak silebilirsin...
+                </p>
+            </div>
+        </div>
+    </div>
 }

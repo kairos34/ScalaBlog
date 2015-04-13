@@ -52,10 +52,6 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> @user.fullname <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="#"><i class="fa fa-fw fa-gear"></i> Ayarlar</a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
                                 <a href="@routes.Application.logout()"><i class="fa fa-fw fa-power-off"></i> Çıkış Yap</a>
                             </li>
                         </ul>
@@ -68,7 +64,7 @@
                             <a href="javascript:;" data-toggle="collapse" data-target="#posts"><i class="fa fa-fw fa-archive"></i> Gönderi İşlemleri <i class="fa fa-fw fa-caret-down"></i></a>
                             <ul id="posts" class="collapse">
                                 <li>
-                                    <a href="#"><i class="fa fa-fw fa-file-text-o"></i> Gönderi Ekle</a>
+                                    <a href="@routes.Application.add()"><i class="fa fa-fw fa-file-text-o"></i> Gönderi Ekle</a>
                                 </li>
                                 <li>
                                     <a href="@routes.Application.posts()"><i class="fa fa-fw fa-pencil-square-o"></i> Gönderi Düzenle</a>
@@ -79,10 +75,10 @@
                             <a href="javascript:;" data-toggle="collapse" data-target="#users"><i class="fa fa-fw fa-users"></i> Kullanıcı İşlemleri <i class="fa fa-fw fa-caret-down"></i></a>
                             <ul id="users" class="collapse">
                                 <li>
-                                    <a href="#"><i class="fa fa-fw fa-user-plus"></i> Kullanıcı Ekle</a>
+                                    <a href="@routes.Application.addUserPage()"><i class="fa fa-fw fa-user-plus"></i> Kullanıcı Ekle</a>
                                 </li>
                                 <li>
-                                    <a href="#"><i class="fa fa-fw fa-pencil-square-o"></i> Kullanıcı Düzenle</a>
+                                    <a href="@routes.Application.users()"><i class="fa fa-fw fa-pencil-square-o"></i> Kullanıcı Düzenle</a>
                                 </li>
                             </ul>
                         </li>

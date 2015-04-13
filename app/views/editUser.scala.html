@@ -1,0 +1,44 @@
+@(form:Form[UserForm],user:User)(implicit flash: Flash)
+
+@adminTemplate("Kullanıcı Düzenle",user){
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    Kullanıcı Düzenleme Sayfası
+                </div>
+                <div class="well">
+                    <h3>Merhaba @user.fullname,</h3>
+                    <p> @form.data("FullName") isimli kullanıcı bilgilerini düzenlemek için aşağıdaki formu düzenleyip kaydet butonuna tıklaman yeterlidir.</p>
+                    <p>Eğer kullanıcıyı silmek istiyorsan hemen aşağıda bulunan sil butonuna basarak bunu gerçekleştirebilirsin.</p>
+                    <div class="row">
+                    @helper.form(routes.Application.deleteUser(form.data("Id").toLong)){
+                        <div class="form-group col-xs-12">
+                            <button type="submit" class="btn btn-danger btn-lg">Sil</button>
+                        </div>
+                    }
+                    </div>
+                </div>
+                @** Update post routing **@
+                @helper.form(routes.Application.editUserRequest()) {
+                    @flash.get("success").map { message =>
+                        <div class="alert alert-dismissable alert-success">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            @message
+                        </div>
+                    }
+                    <br>
+                    <fieldset>@userCreationForm(form)</fieldset>
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group col-xs-12">
+                                <button type="submit" class="btn btn-primary btn-lg">Kaydet</button>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+}
