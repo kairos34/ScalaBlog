@@ -1,6 +1,12 @@
+import com.github.play2war.plugin._
+
 name := """ScalaBlog"""
 
-version := "1.0-SNAPSHOT"
+version := "1.0"
+
+Play2WarPlugin.play2WarSettings
+
+Play2WarKeys.servletVersion := "3.0"
 
 lazy val root = (project in file(".")).enablePlugins(PlayScala)
 
