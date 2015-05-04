@@ -6,6 +6,7 @@ import jp.t2v.lab.play2.auth.{AuthElement, LoginLogout}
 import models.Role.{NormalUser, Administrator}
 import models._
 import play.api.data.Form
+import play.api.libs.mailer._
 import play.api.libs.ws.WS
 import play.api.mvc._
 import play.api.data.Forms._
@@ -126,8 +127,10 @@ object Application extends Controller with LoginLogout with AuthConfigImpl with 
             response => {
               val success = (response.json \ "success").as[Boolean]
               if(success){
-                println(messageContent)
-                //TODO sent mail to the blog owner!!
+                val email = Email("Yeni mesajınız var...",messageContent.email,Seq("alper.ytu7@gmail.com"),Some("Gönderenin Adı: "+messageContent.name+" ,Telefon Numarası: "+messageContent.phone+
+                  " ,Email Adresi: "+messageContent.email+" Mesajı: "+messageContent.message)
+                )
+                MailerPlugin.send(email)
                 Redirect(routes.Application.contact()).flashing("success"->"Mesajınız başarıyla yollandı!")
               }
               else
