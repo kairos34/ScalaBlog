@@ -15,6 +15,7 @@ Live Website: [www.alperozaslan.com] (http://www.alperozaslan.com)
 - Gist Loader for code snippets https://github.com/moski/gist-Blogger
 - Mailer plugin for Play Framework https://github.com/playframework/play-mailer
 - Authentication plugin for Play Framework https://github.com/t2v/play2-auth
+- Slick plugin for Play Framework https://github.com/playframework/play-slick
 
 ## Technologies
 
