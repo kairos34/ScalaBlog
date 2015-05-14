@@ -32,6 +32,15 @@
             </div>
         </div>
         <br>
+        <figure class="kudo kudoable" data-id="1">
+            <a class="kudobject">
+                <div class="opening"><div class="circle">&nbsp;</div></div>
+            </a>
+            <a href="#kudo" class="count">
+                <span class="num">0</span>
+                <span class="txt">Kudos</span>
+            </a>
+        </figure>
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
@@ -59,6 +68,53 @@
         <script>
         var options = { "publisher" : "62e5f53a-052b-46ed-8fcc-589710348e79", "position" : "left", "ad" : { "visible" : false, "openDelay" : 5, "closeDelay" : 0 }, "chicklets" : { "items" :[ "facebook", "twitter", "googleplus", "linkedin", "reddit", "sharethis" ] } } ;
         var st_hover_widget = new sharethis.widgets.hoverbuttons ( options ) ;
+        </script>
+        <script type="text/javascript">
+        // needs to be a string for jquery.cookie
+        var postId = @postNavigator.post.id.toString;
+        $(function()
+        {
+        // initialize kudos
+        $("figure.kudoable").kudoable();
+        // check to see if user has already kudod
+        // fyi cookies do not work when you are viewing this as a file
+        if($.cookie(postId) == 'true') {
+        // make kudo already kudod
+        $("figure.kudoable").removeClass("animate").addClass("complete");
+        // your server would take care of the proper kudos count, but because this is a
+        // static page, we need to set it here so it doesn't become -1 when you remove
+        // the kudos after a reload
+        $(".num").html(1);
+        }
+        // when kudoing
+        $("figure.kudo").bind("kudo:active", function(e)
+        {
+        console.log("kudoing active");
+        });
+        // when not kudoing
+        $("figure.kudo").bind("kudo:inactive", function(e)
+        {
+        console.log("kudoing inactive");
+        });
+        // after kudo'd
+        $("figure.kudo").bind("kudo:added", function(e)
+        {
+        var element = $(this);
+        // ajax'y stuff or whatever you want
+        console.log("Kodo'd:", element.data('id'), ":)");
+        // set cookie so user cannot kudo again for 7 days
+        $.cookie(postId, 'true', { expires: 7 });
+        });
+        // after removing a kudo
+        $("figure.kudo").bind("kudo:removed", function(e)
+        {
+        var element = $(this);
+        // ajax'y stuff or whatever you want
+        console.log("Un-Kudo'd:", element.data('id'), ":(");
+        // remove cookie
+        $.removeCookie(postId);
+        });
+        });
         </script>
     </article>
 
