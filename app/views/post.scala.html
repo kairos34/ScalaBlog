@@ -12,19 +12,33 @@
                 </div>
             </div>
             <div class="row">
+                <div class="col-lg-1 col-lg-offset-5 col-md-1 col-md-offset-5">
+                    <figure class="kudo kudoable" data-id="1">
+                        <a class="kudobject">
+                            <div class="opening">
+                                <div class="circle">&nbsp;</div>
+                            </div>
+                        </a>
+                        <a href="#kudo" class="count">
+                            <span class="num">0</span>
+                            <span class="txt">Kudos</span>
+                        </a>
+                    </figure>
+                </div>
+            </div>
+            <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                     <hr>
                     <ul class="pager">
                         @if(postNavigator.hasPrev) {
                             <li class="previous">
-                                <a href="@routes.Application.blog(postNavigator.prevId)" data-toggle="tooltip" data-placement="top" title="@postNavigator.prevTitle">&larr;
-                                    Önceki Gönderi</a>
+                                <a href="@routes.Application.blog(postNavigator.prevId)" data-toggle="tooltip" data-placement="top" title="@postNavigator.prevTitle">&larr; Önceki</a>
                             </li>
                         }
                         @if(postNavigator.hasNext) {
                             <li class="next">
                                 <a href="@routes.Application.blog(postNavigator.nextId)" data-toggle="tooltip" data-placement="top" title="@postNavigator.nextTitle">
-                                    Sonraki Gönderi &rarr;</a>
+                                    Sonraki &rarr;</a>
                             </li>
                         }
                     </ul>
@@ -32,15 +46,6 @@
             </div>
         </div>
         <br>
-        <figure class="kudo kudoable" data-id="1">
-            <a class="kudobject">
-                <div class="opening"><div class="circle">&nbsp;</div></div>
-            </a>
-            <a href="#kudo" class="count">
-                <span class="num">0</span>
-                <span class="txt">Kudos</span>
-            </a>
-        </figure>
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
@@ -49,73 +54,85 @@
                 </div>
             </div>
         </div>
-
-        <script type="text/javascript">
-        /* * * CONFIGURATION VARIABLES * * */
-        var disqus_shortname = 'alperozaslan' ;
-        var disqus_identifier = @postNavigator.post.id ;
-
-        /* * * DON'T EDIT BELOW THIS LINE * * */
-        ( function ( ) {
-        var dsq = document.createElement ( 'script' ) ; dsq.type = 'text/javascript' ; dsq.async = true ;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js' ;
-        ( document.getElementsByTagName ( 'head' )[ 0 ] || document.getElementsByTagName ( 'body' )[ 0 ] ).appendChild ( dsq ) ;
-        } ) ( ) ;
-        </script>
-        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">
-            comments powered by Disqus.</a></noscript>
-        <script type="text/javascript">stLight.options ( { publisher : "62e5f53a-052b-46ed-8fcc-589710348e79", doNotHash : false, doNotCopy : false, hashAddressBar : false } ) ;</script>
-        <script>
-        var options = { "publisher" : "62e5f53a-052b-46ed-8fcc-589710348e79", "position" : "left", "ad" : { "visible" : false, "openDelay" : 5, "closeDelay" : 0 }, "chicklets" : { "items" :[ "facebook", "twitter", "googleplus", "linkedin", "reddit", "sharethis" ] } } ;
-        var st_hover_widget = new sharethis.widgets.hoverbuttons ( options ) ;
-        </script>
-        <script type="text/javascript">
-        // needs to be a string for jquery.cookie
-        var postId = @postNavigator.post.id.toString;
-        $(function()
-        {
-        // initialize kudos
-        $("figure.kudoable").kudoable();
-        // check to see if user has already kudod
-        // fyi cookies do not work when you are viewing this as a file
-        if($.cookie(postId) == 'true') {
-        // make kudo already kudod
-        $("figure.kudoable").removeClass("animate").addClass("complete");
-        // your server would take care of the proper kudos count, but because this is a
-        // static page, we need to set it here so it doesn't become -1 when you remove
-        // the kudos after a reload
-        $(".num").html(1);
-        }
-        // when kudoing
-        $("figure.kudo").bind("kudo:active", function(e)
-        {
-        console.log("kudoing active");
-        });
-        // when not kudoing
-        $("figure.kudo").bind("kudo:inactive", function(e)
-        {
-        console.log("kudoing inactive");
-        });
-        // after kudo'd
-        $("figure.kudo").bind("kudo:added", function(e)
-        {
-        var element = $(this);
-        // ajax'y stuff or whatever you want
-        console.log("Kodo'd:", element.data('id'), ":)");
-        // set cookie so user cannot kudo again for 7 days
-        $.cookie(postId, 'true', { expires: 7 });
-        });
-        // after removing a kudo
-        $("figure.kudo").bind("kudo:removed", function(e)
-        {
-        var element = $(this);
-        // ajax'y stuff or whatever you want
-        console.log("Un-Kudo'd:", element.data('id'), ":(");
-        // remove cookie
-        $.removeCookie(postId);
-        });
-        });
-        </script>
     </article>
+    <script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'alperozaslan' ;
+    var disqus_identifier = @postNavigator.post.id ;
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    ( function ( ) {
+    var dsq = document.createElement ( 'script' ) ; dsq.type = 'text/javascript' ; dsq.async = true ;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js' ;
+    ( document.getElementsByTagName ( 'head' )[ 0 ] || document.getElementsByTagName ( 'body' )[ 0 ] ).appendChild ( dsq ) ;
+    } ) ( ) ;
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">
+        comments powered by Disqus.</a></noscript>
+    <script type="text/javascript">stLight.options ( { publisher : "62e5f53a-052b-46ed-8fcc-589710348e79", doNotHash : false, doNotCopy : false, hashAddressBar : false } ) ;</script>
+    <script>
+    var options = { "publisher" : "62e5f53a-052b-46ed-8fcc-589710348e79", "position" : "left", "ad" : { "visible" : false, "openDelay" : 5, "closeDelay" : 0 }, "chicklets" : { "items" :[ "facebook", "twitter", "googleplus", "linkedin", "reddit", "sharethis" ] } } ;
+    var st_hover_widget = new sharethis.widgets.hoverbuttons ( options ) ;
+    </script>
+    <script>
+    $ ( function ( ) {
+    Parse.initialize ( "BJAbkjnPplZ8MUKwqwU4KNXDXtuzvQvPkaglRp23",
+    "XSq8UxMA5z4RhcENahlQOy2XrMeJWdWe14LAYijf" ) ;
+
+    //url key for parse api
+    var key = @postNavigator.post.id.toString ;
+
+    $ ( "figure.kudoable" ).kudoable ( ) ;
+
+    var Kudos = Parse.Object.extend ( "Kudos" ) ;
+    var query = new Parse.Query ( Kudos ) ;
+
+    var kudo ;
+
+    query.equalTo ( "url", key ) ;
+    query.first ( {
+    success : function ( result ) {
+    kudo = result ;
+    if ( kudo == null ) {
+    kudo = new Kudos ( ) ;
+    kudo.set ( "url", key ) ;
+    kudo.set ( "score", 0 ) ;
+    kudo.save ( ) ;
+    }
+    $ ( ".num" ).html ( kudo.get ( "score" ) ) ;
+    },
+    error : function ( error ) {
+    kudo = new Kudos ( ) ;
+    kudo.set ( "url", key ) ;
+    kudo.set ( "score", 0 ) ;
+    kudo.save ( ) ;
+    }
+    } ) ;
+
+    if ( $.jStorage.get ( key ) ) {
+    $ ( "figure.kudoable" ).removeClass ( "animate" ).addClass ( "complete" ) ;
+    }
+
+    $ ( "figure.kudo" ).bind ( "kudo:added", function ( e ) {
+    kudo.increment ( "score" ) ;
+    $.jStorage.set ( key, true ) ;
+    kudo.save ( null, {
+    success : function ( k ) {
+    $ ( ".num" ).html ( k.get ( "score" ) ) ;
+    }
+    } ) ;
+    } ) ;
+
+    $ ( "figure.kudo" ).bind ( "kudo:removed", function ( e ) {
+    kudo.increment ( "score", - 1 ) ;
+    $.jStorage.set ( key, false ) ;
+    kudo.save ( null, { success : function ( k ) {
+    $ ( ".num" ).html ( k.get ( "score" ) ) ;
+    } } ) ;
+    } ) ;
+
+    } ) ;
+
+    </script>
 
 }

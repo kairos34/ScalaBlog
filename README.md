@@ -18,6 +18,7 @@ Live Website: [www.alperozaslan.com] (http://www.alperozaslan.com)
 - Authentication plugin for Play Framework https://github.com/t2v/play2-auth
 - Slick plugin for Play Framework https://github.com/playframework/play-slick
 - Kudos plugin https://github.com/masukomi/kudos
+- Parse API for storing kudos count https://parse.com
 
 ## Technologies
 

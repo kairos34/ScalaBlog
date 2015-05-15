@@ -1,7 +1,7 @@
 package models
 
 import java.text.{SimpleDateFormat, DateFormat}
-import java.util.{Calendar}
+import java.util.{Locale, Calendar}
 import play.api.data.Form
 import play.api.data.Forms._
 import play.api.db.slick.DB
@@ -54,7 +54,7 @@ object Posts extends DAO{
 
  /** Long to date for posting date **/
   def convertDate(time:Long):String = {
-    val df:DateFormat = new SimpleDateFormat("dd MMMMM yyyy")
+    val df:DateFormat = new SimpleDateFormat("dd MMMMM yyyy",new Locale("tr"))
     val cal:Calendar = Calendar.getInstance()
       cal.setTimeInMillis(time)
       df.format(cal.getTime)
