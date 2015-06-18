@@ -76,11 +76,12 @@
     </script>
     <script>
     $ ( function ( ) {
-    Parse.initialize ( "BJAbkjnPplZ8MUKwqwU4KNXDXtuzvQvPkaglRp23",
+    Parse.initialize (
+    "BJAbkjnPplZ8MUKwqwU4KNXDXtuzvQvPkaglRp23",
     "XSq8UxMA5z4RhcENahlQOy2XrMeJWdWe14LAYijf" ) ;
 
     //url key for parse api
-    var key = @postNavigator.post.id.toString ;
+    var key = document.location.pathname ;
 
     $ ( "figure.kudoable" ).kudoable ( ) ;
 
