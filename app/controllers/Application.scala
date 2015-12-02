@@ -5,6 +5,7 @@ import java.util.{Calendar, Random}
 import jp.t2v.lab.play2.auth.{AuthElement, LoginLogout}
 import models.Role.{NormalUser, Administrator}
 import models._
+import play.Play
 import play.api.data.Form
 import play.api.libs.mailer._
 import play.api.libs.ws.WS
@@ -284,6 +285,15 @@ object Application extends Controller with LoginLogout with AuthConfigImpl with 
         Users.update(editedUser.id,new User(editedUser.id,editedUser.email,HashFactory.hash(editedUser.password),editedUser.fullname,Role.valueOf(editedUser.permission)))
         Redirect(routes.Application.editUser(editedUser.id)).flashing("success"->"Kullanıcı bilgileri başarıyla güncellendi!")
       }
+    )
+  }
+
+  def showCV = Action {
+    val playroot = Play.application().path().getPath()
+    val filename = playroot + "/AlperCV.pdf";
+    Ok.sendFile(
+      content = new java.io.File(filename),
+      inline = true
     )
   }
 }
