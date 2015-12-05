@@ -288,11 +288,13 @@ object Application extends Controller with LoginLogout with AuthConfigImpl with 
     )
   }
 
+  /**
+   * This function returns CV file
+   * @return pdf CV file
+   */
   def showCV = Action {
-    val playroot = Play.application().path().getPath()
-    val filename = playroot + "/AlperCV.pdf";
     Ok.sendFile(
-      content = new java.io.File(filename),
+      content = new java.io.File(play.Play.application.resource ("public/AlperCV.pdf").toURI),
       inline = true
     )
   }
