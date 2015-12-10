@@ -1,12 +1,15 @@
 package controllers
 
+import java.io.ByteArrayInputStream
 import java.util.{Calendar, Random}
 
+import com.google.common.io.ByteStreams
 import jp.t2v.lab.play2.auth.{AuthElement, LoginLogout}
 import models.Role.{NormalUser, Administrator}
 import models._
 import play.Play
 import play.api.data.Form
+import play.api.libs.iteratee.Enumerator
 import play.api.libs.mailer._
 import play.api.libs.ws.WS
 import play.api.mvc._
@@ -293,9 +296,14 @@ object Application extends Controller with LoginLogout with AuthConfigImpl with 
    * @return CV file
    */
   def showCV = Action {
-    Ok.sendFile(
-      content = new java.io.File(Thread.currentThread().getContextClassLoader.getResource("public/AlperCV.pdf").getFile),
-      inline = true
+    val pdfAsByteArray = ByteStreams.toByteArray(play.Play.application.resourceAsStream("public/AlperCV.pdf"))
+    val ticketInputStream = new ByteArrayInputStream(pdfAsByteArray)
+    val fileContent = Enumerator.fromStream(ticketInputStream)
+    val headers = Map(
+      CONTENT_LENGTH -> pdfAsByteArray.length.toString,
+      CONTENT_DISPOSITION -> "inline"
     )
+    Result(ResponseHeader(200, headers), fileContent
+    ).as("application/pdf")
   }
 }
