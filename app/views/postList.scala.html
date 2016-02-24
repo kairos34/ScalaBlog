@@ -1,44 +1,49 @@
-@(currentPage: Page[Post],user:User)(implicit flash: play.api.mvc.Flash)
-
-@****************************************
-* Helper generating navigation links    *
-****************************************@
-@link(newPage: Int) = @{routes.Application.posts(newPage)}
-
-@adminTemplate("Gönderi Listesi",user) {
-
-    @flash.get("success").map { message =>
-        <div class="alert alert-dismissable alert-success">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-            @message
-        </div>
+@(currentPage: Page[Post], user: User)(implicit flash: play.api.mvc.Flash)
+    @****************************************
+    * Helper generating navigation links *
+    ****************************************@
+    @link(newPage: Int) = @{
+        routes.Application.posts(newPage)
     }
 
-            @Option(currentPage.items).filterNot(_.isEmpty).map { posts =>
-                @posts.map{ post =>
-                    @postPreview(post,false)
+    @adminTemplate("Gönderi Listesi", user) {
+
+        @flash.get("success").map { message =>
+            <div class="alert alert-dismissable alert-success">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                @message
+            </div>
+        }
+
+        @Option(currentPage.items).filterNot(_.isEmpty).map { posts =>
+            @posts.map { post =>
+                @if(post.equals(posts.last)) {
+                    @postPreview(post, false, true)
+                } else {
+                    @postPreview(post, false, false)
                 }
-            <ul class="pager">
-                @currentPage.prev.map { page =>
-
-                <li class="previous">
-                    <a href="@link(page)">&larr; Yeni Gönderiler</a>
-                </li>
-
-                }.getOrElse{
-                    @** Do not show pager **@
-                }
-                @currentPage.next.map{ page =>
-
-                <li class="next">
-                    <a href="@link(page)">Eski Gönderiler &rarr;</a>
-                </li>
-
-                }.getOrElse{
-                    @** Do not show pager **@
-                }
-            </ul>
-            }.getOrElse{
-                <h1>Bu sayfada yayınlanmış hiçbir gönderiniz bulunmamaktadır!</h1>
             }
-}
+        <ul class="pager">
+            @currentPage.prev.map { page =>
+
+            <li class="previous">
+                <a href="@link(page)">&larr; Yeni Gönderiler</a>
+            </li>
+
+            }.getOrElse {
+                @** Do not show pager **@
+            }
+            @currentPage.next.map { page =>
+
+            <li class="next">
+                <a href="@link(page)">Eski Gönderiler &rarr;</a>
+            </li>
+
+            }.getOrElse {
+                @** Do not show pager **@
+            }
+        </ul>
+        }.getOrElse {
+            <h1>Bu sayfada yayınlanmış hiçbir gönderiniz bulunmamaktadır!</h1>
+        }
+    }

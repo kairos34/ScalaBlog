@@ -1,25 +1,25 @@
-@(post:Post,blogPage:Boolean)
-
-@**************************************************
-* Generate post preview from post *
-**************************************************@
+@(post: Post, blogPage: Boolean, isLast: Boolean)
+    @**************************************************
+    * Generate post preview from post *
+    **************************************************@
 <div class="post-preview">
-    @if(blogPage){
-    <a href="@routes.Application.blog(post.id)">
-    }else{
-    <a href="@routes.Application.edit(post.id)">
-    }
-        <h2 class="post-title">
-        @post.title
-        </h2>
+    @if(blogPage) {
+        <a href="@routes.Application.blog(post.id)"></a>
+        } else {
+        <a href="@routes.Application.edit(post.id)"></a>
+        }
+    <h2 class="post-title">
+    @post.title
+    </h2>
 
-        <h3 class="post-subtitle">
-            @post.subTitle
-        </h3>
-
-    </a>
+    <h3 class="post-subtitle">
+    @post.subTitle
+    </h3>
     <p class="post-meta">
-        <i class="fa fa-clock-o"></i> @Users.findById(post.userId).get.fullname tarafından @Posts.convertDate(post.date) tarihinde yazıldı
+        <i class="fa fa-clock-o"></i> @Users.findById(post.userId).get.fullname
+        tarafından @Posts.convertDate(post.date) tarihinde yazıldı
     </p>
 </div>
-<hr>
+    @if(!isLast) {
+        <hr>
+    }
