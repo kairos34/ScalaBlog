@@ -1,0 +1,38 @@
+<html>
+    <head>
+        <title>Aradığını Bulamadık!</title>
+
+        <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.ico")">
+            <!-- Bootstrap Core CSS -->
+        <link rel="stylesheet" href="@routes.Assets.at("stylesheets/bootstrap.min.css")">
+            <!-- Custom CSS -->
+        <link rel="stylesheet" href="@routes.Assets.at("stylesheets/clean-blog.css")">
+
+            <!-- Custom Fonts -->
+        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+        <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+        <script src="@routes.Assets.at("javascripts/jquery-1.9.1.min.js")"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <script src="@routes.Assets.at("javascripts/clean-blog.js")"></script>
+    </head>
+    <body>
+
+        @navbar(true)
+
+        <br>
+        <br>
+        <div class="container">
+         <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <h1>Aradığını bulamadık!</h1>
+                <h4>Menüden açmak istediğin sayfayı açabilirsin<i class="fa fa-smile-o"></i></h4>
+                <img src="http://www.brandcrowd.com/images/404.jpg" class="img-responsive">
+            </div>
+        </div>
+
+        @footer()
+
+    </body>
+</html>
