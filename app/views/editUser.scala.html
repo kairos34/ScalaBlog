@@ -12,11 +12,11 @@
                     <p> @form.data("FullName") isimli kullanıcı bilgilerini düzenlemek için aşağıdaki formu düzenleyip kaydet butonuna tıklaman yeterlidir.</p>
                     <p>Eğer kullanıcıyı silmek istiyorsan hemen aşağıda bulunan sil butonuna basarak bunu gerçekleştirebilirsin.</p>
                     <div class="row">
-                    @helper.form(routes.Application.deleteUser(form.data("Id").toLong)){
+                        @helper.form(routes.Application.deleteUser(form.data("Id").toLong),'id -> "delete_form"){
+                        }
                         <div class="form-group col-xs-12">
-                            <button type="submit" class="btn btn-danger btn-lg">Sil</button>
+                            <button type="submit" class="btn btn-danger btn-lg" id="delete_button">Sil</button>
                         </div>
-                    }
                     </div>
                 </div>
                 @** Update post routing **@

@@ -14,12 +14,17 @@
         <title>@title</title>
 
         <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.ico")">
+            <!-- Custom Fonts -->
+        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
             <!-- Bootstrap Core CSS -->
         <link rel="stylesheet" href="@routes.Assets.at("stylesheets/bootstrap.min.css")">
             <!-- Custom CSS -->
         <link rel="stylesheet" href="@routes.Assets.at("stylesheets/sb-admin.css")">
-            <!-- Custom Fonts -->
-        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.9/css/bootstrap-dialog.min.css" rel="stylesheet" type="text/css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.9/js/bootstrap-dialog.min.js"></script>
+        <script src="@routes.Assets.at("javascripts/clean-blog.js")"></script>
 
             <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
             <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -103,12 +108,28 @@
         </div>
             <!-- /#wrapper -->
 
-            <!-- jQuery -->
-        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-
-            <!-- Bootstrap Core JavaScript -->
-        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-        <script src="@routes.Assets.at("javascripts/clean-blog.js")"></script>
+        <!-- Confirmation dialog for both user and post deletion process -->
+        <script type="text/javascript">
+        $ ( "#delete_button" ).click ( function ( ) {
+                    BootstrapDialog.confirm({
+                        title: 'UYARI',
+                        message: 'Gerçekten silmek istiyor musun?',
+                        type: BootstrapDialog.TYPE_WARNING,
+                        closable: true,
+                        draggable: true,
+                        btnCancelLabel: 'Hayır',
+                        btnOKLabel: 'Evet',
+                        btnOKClass: 'btn-danger',
+                        callback: function(result) {
+                        if(result) {
+                            $('#delete_form' ).submit();
+                        }else {
+                            event.preventDefault();
+                        }
+                    }
+                });
+            } ) ;
+        </script>
     </body>
 
 </html>

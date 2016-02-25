@@ -13,15 +13,15 @@
                     içeriğini aşağıdaki formu düzenleyip kaydederek değiştirebilirsin.</p>
                     <p>Eğer gönderiyi silmek istiyorsan hemen aşağıda bulunan sil butonuna basarak bunu gerçekleştirebilirsin.</p>
                     <div class="row">
-                        @helper.form(routes.Application.deletePost(form.data("Id").toLong)){
-                            <div class="form-group col-xs-12">
-                                <button type="submit" class="btn btn-danger btn-lg">Sil</button>
-                            </div>
+                        @helper.form(action=routes.Application.deletePost(form.data("Id").toLong),'id -> "delete_form"){
                         }
+                        <div class="form-group col-xs-12">
+                            <button type="submit" class="btn btn-danger btn-lg" id="delete_button">Sil</button>
+                        </div>
                     </div>
                 </div>
             @** Update post routing **@
-        @helper.form(routes.Application.editPost()) {
+            @helper.form(routes.Application.editPost()) {
             @flash.get("success").map { message =>
                 <div class="alert alert-dismissable alert-success">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
@@ -43,11 +43,23 @@
     </div>
     </div>
 
-    <script src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script>
-    <script>tinymce.init({selector:'textarea', plugins: [
-    "advlist autolink lists link image charmap print preview anchor",
-    "searchreplace visualblocks code fullscreen",
-    "insertdatetime media table contextmenu paste"
+    <script src="//tinymce.cachefly.net/4.3/tinymce.min.js"></script>
+    <script>tinymce.init({
+    selector: 'textarea',
+    height: 500,
+    theme: 'modern',
+    plugins: [
+    'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+    'searchreplace wordcount visualblocks visualchars code fullscreen',
+    'insertdatetime media nonbreaking save table contextmenu directionality',
+    'emoticons template paste textcolor colorpicker textpattern imagetools'
+    ],
+    toolbar1: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+    toolbar2: 'print preview media | forecolor backcolor emoticons',
+    image_advtab: true,
+    content_css: [
+    '//fast.fonts.net/cssapi/e6dc9b99-64fe-4292-ad98-6974f93cd2a2.css',
+    '//www.tinymce.com/css/codepen.min.css'
     ]
     });</script>
 }
