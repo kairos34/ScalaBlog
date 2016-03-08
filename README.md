@@ -12,7 +12,7 @@ Live Website: [www.alperozaslan.com] (http://www.alperozaslan.com)
 - Disqus Comment System https://disqus.com
 - TinyMce WYSIWYG editor http://www.tinymce.com/index.php
 - Google reCAPTCHA https://www.google.com/recaptcha/intro/index.html
-- ShareThis plugin for post sharing http://www.sharethis.com
+- AddThis plugin for post sharing https://www.addthis.com
 - Gist Loader for code snippets https://github.com/moski/gist-Blogger
 - Mailer plugin for Play Framework https://github.com/playframework/play-mailer
 - Authentication plugin for Play Framework https://github.com/t2v/play2-auth

@@ -35,6 +35,18 @@ a:hover,
 a:focus {
   color: #7ac143;
 }
+a.facebook:hover,
+a.facebook:focus {
+  color: #3b5998;
+}
+a.twitter:hover,
+a.twitter:focus {
+  color: #00aced;
+}
+a.linkedin:hover,
+a.linkedin:focus {
+  color: #0077b5;
+}
 a img:hover,
 a img:focus {
   cursor: zoom-in;
@@ -314,7 +326,7 @@ footer .copyright {
   -ms-transition: top 0.3s ease,opacity 0.3s ease;
   transition: top 0.3s ease,opacity 0.3s ease;
 }
-.floating-label-form-group::not(:first-child) {
+.floating-label-form-group:not(:first-child) {
   padding-left: 14px;
   border-left: 1px solid #eeeeee;
 }
