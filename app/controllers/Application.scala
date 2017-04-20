@@ -306,4 +306,11 @@ object Application extends Controller with LoginLogout with AuthConfigImpl with 
     Result(ResponseHeader(200, headers), fileContent
     ).as("application/pdf")
   }
+
+  def showAcme = Action {
+    Ok.sendFile(
+      content = new java.io.File(".well-known/acme-challenge"),
+      inline = true
+    )
+  }
 }
