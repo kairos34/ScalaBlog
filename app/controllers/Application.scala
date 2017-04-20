@@ -308,6 +308,6 @@ object Application extends Controller with LoginLogout with AuthConfigImpl with 
   }
 
   def letsEncrypt(id:String) = Action {
-    Ok("OyGZTOnHzuihu4rnGfcgRd4zmX7eTnvEzL3wpY44jGU.i7QLHARM7G5U8xD3Cqfxv75SaC9gfx6DJWldBI0euNc")
+    Ok("50ZcxQJZi-DTECvrhcdq1Uta2cSOgiiPUkljTWacloQ.i7QLHARM7G5U8xD3Cqfxv75SaC9gfx6DJWldBI0euNc")
   }
 }
