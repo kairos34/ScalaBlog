@@ -306,4 +306,8 @@ object Application extends Controller with LoginLogout with AuthConfigImpl with 
     Result(ResponseHeader(200, headers), fileContent
     ).as("application/pdf")
   }
+
+  def letsEncrypt(id:String) = {
+    Ok("OyGZTOnHzuihu4rnGfcgRd4zmX7eTnvEzL3wpY44jGU.i7QLHARM7G5U8xD3Cqfxv75SaC9gfx6DJWldBI0euNc")
+  }
 }
