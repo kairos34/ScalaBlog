@@ -26,7 +26,6 @@ GET         /editUser/:id        controllers.Application.editUser(id:Long)
 POST        /editUser            controllers.Application.editUserRequest
 POST        /deleteUser          controllers.Application.deleteUser(id:Long)
 GET         /alperCV             controllers.Application.showCV
-GET         /.well-known/acme-challenge  controllers.Application.showAcme
 
 
 # Map static resources from the /public folder to the /assets URL path
